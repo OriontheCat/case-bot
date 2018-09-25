@@ -6,10 +6,10 @@ class Skin {
   String name;
   double wear;
   List<double> possiblewear;
-  bool statTrack;
-  String imageURL;
+  bool statTrak;
+  String imageUrl;
   Rarity rarity;
-  bool canStatTrack;
+  bool canStatTrak;
   Weapon weapon;
   static int nextID = 1;
   int id;
@@ -17,13 +17,13 @@ class Skin {
   Skin(
       {String this.name,
       List<double> this.possiblewear: const [0.0, 1.0],
-      bool this.canStatTrack: true,
-      String this.imageURL,
+      bool this.canStatTrak: true,
+      String this.imageUrl,
       Rarity this.rarity,
       Weapon this.weapon,
       double this.percentage}) {
     this.wear = generateWear(this.possiblewear[0], this.possiblewear[1]);
-    this.statTrack = this.canStatTrack && Math.Random().nextDouble() >= 0.1;
+    this.statTrak = (this.canStatTrak && Math.Random().nextInt(9) == 0);
   }
 
   void activate() {
@@ -33,6 +33,13 @@ class Skin {
 
   static double generateWear(double min, double max) {
     return Math.Random().nextDouble() * (max - min) + min;
+  }
+
+  String get statTrakString {
+    if (this.statTrak) {
+      return "StatTrak™ ";
+    }
+    return "";
   }
 
   String get wearString {

@@ -1,8 +1,18 @@
 class Weapon extends Pistols {
   String name;
   String type;
-
-  Weapon(String this.name, String this.type);
+  String url;
+  String imageUrl;
+  Weapon(String this.name, String this.type, [this.url, this.imageUrl]) {
+    if (this.url == null) {
+      this.url = "https://csgostash.com/weapon/" + this.name
+        ..replaceAll(" ", "+");
+    }
+    if (this.url == null) {
+      this.imageUrl = "https://csgostash.com/weapon/" + this.name + ".png"
+        ..replaceAll(" ", "_");
+    }
+  }
 }
 
 abstract class WeaponCollection {}
@@ -57,8 +67,24 @@ class MachineGuns extends WeaponCollection {
 }
 
 class Knives extends WeaponCollection {
-  static Weapon navaja = Weapon("Navaja", "Knife");
-  static Weapon stiletto = Weapon("Stiletto", "Knife");
-  static Weapon talon = Weapon("Talon", "Knife");
-  static Weapon ursus = Weapon("Ursus", "Knife");
+  static Weapon navaja = Weapon(
+      "Navaja",
+      "Knife",
+      "https://csgostash.com/weapon/" + "Navaja" + "+" + "Knife",
+      "https://vignette.wikia.nocookie.net/cswikia/images/a/ad/Csgo-default_rare_item.png/revision/latest?cb=20150227163025");
+  static Weapon stiletto = Weapon(
+      "Stiletto",
+      "Knife",
+      "https://csgostash.com/weapon/" + stiletto.name + "+" + stiletto.type,
+      "https://vignette.wikia.nocookie.net/cswikia/images/a/ad/Csgo-default_rare_item.png/revision/latest?cb=20150227163025");
+  static Weapon talon = Weapon(
+      "Talon",
+      "Knife",
+      "https://csgostash.com/weapon/" + talon.name + "+" + talon.type,
+      "https://vignette.wikia.nocookie.net/cswikia/images/a/ad/Csgo-default_rare_item.png/revision/latest?cb=20150227163025");
+  static Weapon ursus = Weapon(
+      "Ursus",
+      "Knife",
+      "https://csgostash.com/weapon/" + ursus.name + "+" + ursus.type,
+      "https://vignette.wikia.nocookie.net/cswikia/images/a/ad/Csgo-default_rare_item.png/revision/latest?cb=20150227163025");
 }

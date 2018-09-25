@@ -14,7 +14,6 @@ abstract class Collection {
     for (var item in items) {
       temppercentage += item.percentage;
       if (temppercentage >= random) {
-        print(item.rarity.name);
         return item;
       }
     }
