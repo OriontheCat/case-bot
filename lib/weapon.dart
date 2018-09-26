@@ -5,12 +5,13 @@ class Weapon extends Pistols {
   String imageUrl;
   Weapon(String this.name, String this.type, [this.url, this.imageUrl]) {
     if (this.url == null) {
-      this.url = "https://csgostash.com/weapon/" + this.name
-        ..replaceAll(" ", "+");
+      this.url = ("https://csgostash.com/weapon/" + this.name)
+          .replaceAll(new RegExp(r" "), "+");
     }
-    if (this.url == null) {
-      this.imageUrl = "https://csgostash.com/weapon/" + this.name + ".png"
-        ..replaceAll(" ", "_");
+    if (this.imageUrl == null) {
+      this.imageUrl =
+          ("https://csgostash.com/img/weapons/" + this.name + ".png")
+              .replaceAll(new RegExp(r" "), "_");
     }
   }
 }

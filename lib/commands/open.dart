@@ -3,7 +3,7 @@ import 'package:nyxx/commands.dart';
 import 'dart:async';
 
 import 'package:dart_case_bot/skin.dart';
-import 'package:dart_case_bot/case.dart';
+import 'package:dart_case_bot/cases/horizon.dart';
 import 'package:dart_case_bot/config.dart' as config;
 
 @Command(name: "open")
@@ -20,7 +20,6 @@ class OpenCommand extends CommandContext {
       ..name = unboxedSkin.weapon.name
       ..url = unboxedSkin.weapon.url
       ..iconUrl = unboxedSkin.weapon.imageUrl;
-
     EmbedFieldBuilder exterior =
         EmbedFieldBuilder("Exterior", "`${unboxedSkin.wearString}`", true);
 
@@ -33,9 +32,8 @@ class OpenCommand extends CommandContext {
     EmbedFieldBuilder id = EmbedFieldBuilder("id", "`${unboxedSkin.id}`", true);
 
     EmbedFooterBuilder footer = EmbedFooterBuilder()
-      ..iconUrl =
-          "https://www.freeiconspng.com/uploads/csgo-orange-photo-icon-20.png"
-      ..text = "${config.name} v${config.version}";
+      ..iconUrl = "https://images-cdn.9gag.com/photo/aZgrZGW_700b.jpg"
+      ..text = "${config.name} v${config.version} by ${config.author}";
 
     skinEmbed
       ..author = author
@@ -45,13 +43,18 @@ class OpenCommand extends CommandContext {
       ..addFieldBuilder(wear)
       ..addFieldBuilder(statTrak)
       ..addFieldBuilder(id)
-      ..color = unboxedSkin.rarity.color.decimalColor
+      ..color = unboxedSkin.rarity.color.embedColor
       ..footer = footer
       ..thumbnailUrl = horizonCase.imageUrl
       ..imageUrl = unboxedSkin.imageUrl
       ..url =
           "https://github.com/l7ssha/nyxx/blob/commands_rework/example/embeds.dart"; //CHANGE THIS LATER
-    await reply(content: 'You unboxed a:', embed: skinEmbed);
+    try {
+      await reply(content: 'You unboxed a:', embed: skinEmbed);
+    } catch (e) {
+      await reply(content: 'RIP! error 400');
+      print(e.toString());
+    }
   }
 
   @override
