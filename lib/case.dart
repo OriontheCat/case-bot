@@ -10,15 +10,20 @@ class Case {
   final String imageUrl;
   int id;
   CaseCollection collection;
+  bool _activated;
 
   Case(
       {String this.name, String this.imageUrl, CaseCollection this.collection});
 
   void activate() {
-    if (this.id != null) {
+    if (!_activated) {
       this.id = Case.nextID;
       Case.nextID++;
     }
+  }
+
+  bool get activated {
+    return _activated;
   }
 
   Skin open() {
