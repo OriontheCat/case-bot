@@ -6,11 +6,11 @@ import 'package:dart_case_bot/weapons/rifles.dart' ;
 import 'package:dart_case_bot/weapons/machine_guns.dart' ;
 import 'package:dart_case_bot/weapons/knives.dart';
 
-final dynamic {
- pistols : Pistols,
- shotguns : Shotguns,
-submachine_guns : Submachine_guns,
-rifles : rifles.rifles,
-machine_guns : machine_guns.machine_guns,
-knives : Knives,
+class Weapons {
+static WeaponClass pistols = Pistols();
+static WeaponClass shotguns = Shotguns();
+static WeaponClass submachine_guns = SubmachineGuns();
+static WeaponClass rifles = Rifles();
+static WeaponClass machine_guns = MachineGuns();
+static WeaponClass knives = Knives();
 };

@@ -1,6 +1,6 @@
 import 'package:dart_case_bot/weapon.dart';
 
-final Map<String, Weapon> machine_gunst = {
-  "m249": Weapon.machine_gun("M249"),
-  "negev": Weapon.machine_gun("Negev")
-};
+class MachineGuns extends WeaponClass {
+  static Weapon m249 = Weapon.machine_gun("M249");
+  static Weapon negev = Weapon.machine_gun("Negev");
+}
