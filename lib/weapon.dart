@@ -32,5 +32,3 @@ class Weapon {
 
   Weapon.knife(String this.name, [String this.type = "Knife"]);
 }
-
-class WeaponClass {}

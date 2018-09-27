@@ -1,4 +1,4 @@
-import 'package:dart_case_bot/rarity.dart';
+import 'package:dart_case_bot/csgo/rarity.dart';
 import 'package:dart_case_bot/skin.dart';
 import 'dart:math' as Math;
 
@@ -46,5 +46,29 @@ class CaseCollection extends Collection {
 
   Skin getRandomSkin() {
     return getRandomRarityCollection().getRandomSkin();
+  }
+}
+
+class GenericCaseCollection extends CaseCollection {
+  RarityCollection mil_spec;
+  RarityCollection restricted;
+  RarityCollection classified;
+  RarityCollection covert;
+  RarityCollection knife;
+
+  GenericCaseCollection(
+      {this.mil_spec,
+      this.restricted,
+      this.classified,
+      this.covert,
+      this.knife})
+      : super([]) {
+    this.items = [
+      this.mil_spec,
+      this.restricted,
+      this.classified,
+      this.covert,
+      this.knife
+    ];
   }
 }
