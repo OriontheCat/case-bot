@@ -12,5 +12,4 @@ dependencies:
     git:
       url: git://github.com/l7ssha/nyxx.git
       ref: backend_rework
-  sembast: ^1.9.3
-  hex: ^0.1.2
+  http: ^0.12.0

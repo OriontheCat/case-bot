@@ -15,7 +15,7 @@ class Weapon {
     if (this.type == "Knife") {
       return "https://vignette.wikia.nocookie.net/cswikia/images/a/ad/Csgo-default_rare_item.png/revision/latest?cb=20150227163025";
     }
-    return ("https://csgostash.com/weapon/" + this.name + ".png")
+    return ("https://csgostash.com/img/weapons/" + this.name + ".png")
         .replaceAll(new RegExp(r" "), "_");
   }
 

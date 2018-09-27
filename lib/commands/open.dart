@@ -1,7 +1,7 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx/commands.dart';
 import 'dart:async';
-
+import 'package:dart_case_bot/cases.dart';
 import 'package:dart_case_bot/skin.dart';
 import 'package:dart_case_bot/case.dart';
 import 'package:dart_case_bot/config.dart' as config;
@@ -10,10 +10,11 @@ import 'package:dart_case_bot/config.dart' as config;
 class OpenCommand extends CommandContext {
   @Command(main: true)
   Future run() async {
-    HorizonCase horizonCase = HorizonCase()..activate();
+    Case horizonCase = Cases.horizon;
 
     Skin unboxedSkin = horizonCase.open();
-
+    await unboxedSkin.activate();
+    print(unboxedSkin.imageUrl);
     EmbedBuilder skinEmbed = EmbedBuilder();
 
     EmbedAuthorBuilder author = EmbedAuthorBuilder()
@@ -33,9 +34,8 @@ class OpenCommand extends CommandContext {
     EmbedFieldBuilder id = EmbedFieldBuilder("id", "`${unboxedSkin.id}`", true);
 
     EmbedFooterBuilder footer = EmbedFooterBuilder()
-      ..iconUrl =
-          "https://www.freeiconspng.com/uploads/csgo-orange-photo-icon-20.png"
-      ..text = "${config.name} v${config.version}";
+      ..iconUrl = "https://avatars1.githubusercontent.com/u/13704699?s=460&v=4"
+      ..text = "${config.name} v${config.version} by ${config.author}";
 
     skinEmbed
       ..author = author
@@ -45,7 +45,7 @@ class OpenCommand extends CommandContext {
       ..addFieldBuilder(wear)
       ..addFieldBuilder(statTrak)
       ..addFieldBuilder(id)
-      ..color = unboxedSkin.rarity.color.decimalColor
+      ..color = unboxedSkin.rarity.color.embedColor
       ..footer = footer
       ..thumbnailUrl = horizonCase.imageUrl
       ..imageUrl = unboxedSkin.imageUrl

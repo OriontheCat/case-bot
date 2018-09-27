@@ -1,4 +1,4 @@
-import 'package:dart_case_bot/csgo/rarity.dart';
+import 'package:dart_case_bot/rarity.dart';
 import 'package:dart_case_bot/skin.dart';
 import 'dart:math' as Math;
 
