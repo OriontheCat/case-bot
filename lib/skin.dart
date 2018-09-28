@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Skin {
-  static final List<Skin> = new List<Skin> [Skin()];
+  static final List<Skin> _skinList = [];
   String name;
   double wear;
   List<double> possiblewear;
@@ -16,7 +16,7 @@ class Skin {
   Rarity rarity;
   bool canStatTrak;
   Weapon weapon;
-  static int nextID = 1;
+  static int nextID = 0;
   int id;
   double percentage;
   double price;
@@ -38,7 +38,14 @@ class Skin {
     this.price = double.parse(priceMap["average_price"]);
     this.id = Skin.nextID;
     Skin.nextID++;
+    _skinList[this.id] = this;
     return this;
+  }
+
+  Future<double> resetPrice() async {
+    Map<String, dynamic> priceMap = await this.getSkinPrice();
+    this.price = double.parse(priceMap["average_price"]);
+    return this.price;
   }
 
   static double generateWear(double min, double max) {
@@ -62,8 +69,9 @@ class Skin {
 
   Future<dynamic> getSkinPrice() async {
     http.Response skinInfo = await http.get(
-        'http://csgobackpack.net/api/GetItemPrice/?&extend=true&id=${this.statTrakString}${this.weapon.name} | ${this.name} (${this.wearString})'
+        'http://csgobackpack.net/api/GetItemPrice/?extend=true&id=${this.statTrakString}${this.weapon.name} | ${this.name} (${this.wearString})'
             .replaceAll(RegExp(r" "), "%20"));
+    print(skinInfo.body);
     return jsonDecode(skinInfo.body);
   }
 
@@ -71,6 +79,7 @@ class Skin {
     http.Response skinInfo = await http.get(
         'http://csgobackpack.net/api/GetItemPrice/?icon=1&time=1&id=${this.weapon.name} | ${this.name} (${this.wearString})'
             .replaceAll(RegExp(r" "), "%20"));
+    print(skinInfo.body);
     return jsonDecode(skinInfo.body);
   }
 }
